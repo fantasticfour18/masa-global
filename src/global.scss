@@ -1,0 +1,71 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+/* Overrides */
+@import "./theme/_mixins.scss";
+@import "./theme/overrides";
+
+.cal-date-picker {
+    width: 100%;
+}
+
+.cal-date-picker-placeholder {
+    color: #0000007a;
+}
+
+.cal-date-picker .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix {
+    border-top: 0 !important;
+}
+
+.cal-date-picker .mat-form-field-wrapper .mat-form-field-flex, 
+.mat-form-field-infix .mat-form-field-label-wrapper .mat-form-field-label {
+    color: unset !important;
+}
+
+.cal-date-picker .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+
+.cal-date-picker .mat-form-field-underline,
+.cal-date-picker .mat-form-field-underline .mat-form-field-ripple {
+    height: 0 !important;
+}
+
+.date-calendar-modal .modal-wrapper {
+    background: transparent;
+}
+
+.date-cal .mat-calendar-header .mat-calendar-controls .mat-button {
+    background: #2a408f;
+    color: white;
+}
+
+.date-cal .mat-calendar-header .mat-calendar-controls .mat-button .mat-calendar-arrow {
+    border-top-color: white;
+}

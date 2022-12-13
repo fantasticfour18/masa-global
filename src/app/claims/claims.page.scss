@@ -1,0 +1,74 @@
+@import '../../theme/mixins';
+
+.claims {
+  &--skeleton {
+    ion-thumbnail {
+      margin-right: 16px;
+      width: 12px;
+      height: 12px;
+
+      ion-skeleton-text {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &--empty {
+    ion-item {
+      --min-height: 148px;
+      --padding-start: 0;
+      --padding-end: 0;
+      --inner-padding-start: 0;
+      --inner-padding-end: 0;
+    }
+
+    .empty-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto;
+
+      ion-icon {
+        font-size: 48px;
+      }
+
+      ion-text {
+        margin-top: 16px;
+      }
+    }
+  }
+
+  @include claim-status;
+}
+
+ion-item {
+  .title {
+    display: flex;
+    align-items: center;
+  }
+
+  .status-bullet {
+    margin-right: 16px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+}
+
+ion-card-header, ion-card-content {
+  padding: 0;
+}
+
+ion-card-header {
+  ion-item {
+    --background: var(--ion-color-primary);
+  }
+
+  ion-label {
+    --color: var(--ion-color-white);
+  }
+
+  ion-label:first-child {
+    font-size: 14px;
+  }
+}

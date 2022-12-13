@@ -1,0 +1,194 @@
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <form [formGroup]="registerForm" (keyup.enter)="currentSlide == 1 ? checkMemberInformation() : 
+                                      currentSlide == 2 ? sendConfirmationEmail() : confirmRegistration()">
+      <ion-row>
+        <ion-col class="ion-no-padding auth-header"></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-no-padding" [ngSwitch]="currentSlide">
+          <div class="header-navigation" *ngSwitchCase="2">
+            <ion-button (click)="goBack()">
+              <ion-icon slot="icon-only" color="primary" name="arrow-back"></ion-icon>
+              <ion-text slot="end" color="primary">Back</ion-text>
+            </ion-button>
+          </div>
+
+          <div class="header-navigation" *ngSwitchCase="3">
+            <ion-button (click)="goBack()">
+              <ion-icon slot="icon-only" color="primary" name="arrow-back"></ion-icon>
+              <ion-text slot="end" color="primary">Back</ion-text>
+            </ion-button>
+
+            <ion-text class="ion-padding-start ion-padding-end">
+              We sent verification code to your email <span class="bold">{{ secondStep.get('email').value }}</span>.
+            </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-slides [options]="slidesOptions">
+            <ion-slide formGroupName="firstStep">
+              <ion-list class="ion-padding-start ion-padding-end" lines="full">
+                <div class="item-container">
+                  <ion-item>
+                    <ion-label position="stacked">Member ID</ion-label>
+                    <ion-input formControlName="memberId" type="number" pattern="\d*" min="0" max="2147483647" placeholder="12345"></ion-input>
+                  </ion-item>
+
+                  <div class="validation-error" *ngIf="firstStep.get('memberId').touched && firstStep.get('memberId').hasError('required')">
+                    Member ID required
+                  </div>
+
+                  <div class="validation-error" *ngIf="firstStep.get('memberId').touched && firstStep.get('memberId').hasError('min')">
+                    Member ID must be > 0
+                  </div>
+
+                  <div class="validation-error" *ngIf="firstStep.get('memberId').touched && firstStep.get('memberId').hasError('max')">
+                    Member ID must be < 2147483648
+                  </div>
+                </div>
+
+                <div class="item-container">
+                  <ion-item>
+                    <ion-label position="stacked">Birth Date</ion-label>
+                    <!-- <ion-datetime formControlName="birthDate" displayFormat="MM/DD/YYYY" placeholder="12/31/1990"></ion-datetime> -->
+                    <mat-form-field class="cal-date-picker" [floatLabel]="'never'">
+                      <input formControlName="birthDate" matInput readonly (click)="showCalendarModal()">
+                      <!-- <mat-datepicker #picker touchUi class="cal-date-picker"></mat-datepicker> -->
+                      <mat-placeholder class="cal-date-picker-placeholder">
+                        {{firstStep.get('birthDate').value ? '' : '31-Dec-1990'}}
+                      </mat-placeholder>
+                    </mat-form-field>
+                  </ion-item>
+
+                  <div class="validation-error" *ngIf="firstStep.get('birthDate').touched && firstStep.get('birthDate').hasError('required')">
+                    Birth Date required
+                  </div>
+                </div>
+
+                <div class="item-container">
+                  <ion-item>
+                    <ion-label position="stacked">Last Name</ion-label>
+                    <ion-input formControlName="lastName" type="text" placeholder="Johnas"></ion-input>
+                  </ion-item>
+
+                  <div class="validation-error" *ngIf="firstStep.get('lastName').touched && firstStep.get('lastName').hasError('required')">
+                    Last Name required
+                  </div>
+                </div>
+              </ion-list>
+
+             
+              
+            </ion-slide>
+
+            <ion-slide formGroupName="secondStep">
+              <ion-list class="ion-padding-start ion-padding-end" lines="full">
+                <div class="item-container ion-no-margin">
+                  <ion-item>
+                    <ion-label position="stacked">Email</ion-label>
+                    <ion-input formControlName="email" type="text" placeholder="member@domain.com"
+                      (ionChange)="checkSpaces($event)"></ion-input>
+                  </ion-item>
+
+                  <div class="validation-error" *ngIf="secondStep.get('email').touched && secondStep.get('email').hasError('required')">
+                    Email Required
+                  </div>
+
+                  <div class="validation-error" *ngIf="secondStep.get('email').touched && secondStep.get('email').hasError('email')">
+                    Invalid Email format
+                  </div>
+                </div>
+
+                <div class="item-container">
+                  <ion-item>
+                    <ion-label position="stacked">Password</ion-label>
+                    <ion-input formControlName="password" [type]="showPass ? 'text' : 'password'" placeholder="******"></ion-input>
+                    <ion-icon *ngIf="!showPass" name="eye" slot="end" class="show-pass-icon" (click)="showPass=true;"></ion-icon>
+                    <ion-icon *ngIf="showPass" name="eye-off" slot="end" class="show-pass-icon" (click)="showPass=false;"></ion-icon>
+                  </ion-item>
+
+                  <div class="validation-error" *ngIf="secondStep.get('password').touched && secondStep.get('password').hasError('required')">
+                    Password required
+                  </div>
+
+                  <div class="validation-error" *ngIf="secondStep.get('password').touched && secondStep.get('password').hasError('weak')">
+                    {{ secondStep.get('password').getError('weak') }}
+                  </div>
+                </div>
+
+                <div class="item-container">
+                  <ion-item>
+                    <ion-label position="stacked">Password Confirmation</ion-label>
+                    <ion-input formControlName="passwordConfirmation" [type]="showPass ? 'text' : 'password'" placeholder="******"></ion-input>
+                    <ion-icon *ngIf="!showPass" name="eye" slot="end" class="show-pass-icon" (click)="showPass=true;"></ion-icon>
+                    <ion-icon *ngIf="showPass" name="eye-off" slot="end" class="show-pass-icon" (click)="showPass=false;"></ion-icon>
+                  </ion-item>
+
+                  <div class="validation-error" *ngIf="secondStep.get('passwordConfirmation').touched && secondStep.get('passwordConfirmation').hasError('required')">
+                    Password Confirmation required
+                  </div>
+
+                  <div class="validation-error" *ngIf="secondStep.get('passwordConfirmation').touched && secondStep.get('passwordConfirmation').hasError('mismatch')">
+                    Passwords mismatch
+                  </div>
+                </div>
+              </ion-list>
+            </ion-slide>
+
+            <ion-slide formGroupName="thirdStep">
+              <ion-list class="ion-padding-start ion-padding-end" lines="full">
+                <div class="item-container ion-no-margin">
+                  <ion-item>
+                    <ion-label position="stacked">Confirmation Code</ion-label>
+                    <ion-input formControlName="verificationCode" type="text" placeholder="123456"></ion-input>
+                  </ion-item>
+
+                  <div class="validation-error" *ngIf="thirdStep.get('verificationCode').touched && thirdStep.get('verificationCode').hasError('required')">
+                    Confirmation Code required
+                  </div>
+                </div>
+              </ion-list>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-row class="footer">
+            <ion-col class="ion-no-padding" [ngSwitch]="currentSlide">
+              <div *ngSwitchCase="1">
+                <ion-button (click)="checkMemberInformation()" class="ion-padding-start ion-padding-end" expand="block">
+                  Next
+                </ion-button>
+
+                <a class="footer__link" routerLink="/auth/login" routerDirection="root">I have an account</a>
+              </div>
+
+              <div *ngSwitchCase="2">
+                <ion-button (click)="sendConfirmationEmail()" class="ion-padding-start ion-padding-end" expand="block">
+                  Send Email
+                </ion-button>
+
+                <a class="footer__link" routerLink="/auth/login" routerDirection="root">I have an account</a>
+              </div>
+
+              <div *ngSwitchCase="3">
+                <ion-button (click)="confirmRegistration()" class="ion-padding-start ion-padding-end" expand="block">
+                  Confirm
+                </ion-button>
+
+                <a class="footer__link" (click)="resendVerificationCode()">Resend email</a>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-footer>
+    </form>
+  </ion-grid>
+</ion-content>

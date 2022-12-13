@@ -1,0 +1,13 @@
+:host {
+  ion-list-header {
+    --background: var(--ion-background-color);
+  }
+
+  ion-item {
+    --background: var(--ion-background-color);
+
+    &:last-child {
+      --inner-border-width: 0 0 0.55px 0;
+    }
+  }
+}

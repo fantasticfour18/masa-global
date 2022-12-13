@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Payments
+    </ion-title>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- <ion-button class="payment-button ion-padding-start ion-padding-end ion-text-uppercase" color="success" expand="block">
+    Add payment
+  </ion-button> -->
+
+  <ion-card-header class="ion-margin update-bank-btn">
+    <ion-list lines="none" routerLink="/tabs/profile/bank-card">
+      <ion-item>
+        <ion-label class="ion-text-uppercase">Update Bank Details</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-header>
+
+  <ion-card class="payments-history-card">
+    <ion-card-header>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label class="ion-text-uppercase">Payments History</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list class="payments" *ngIf="payments">
+        <ion-item *ngFor="let payment of payments">
+          <ion-label class="fit-content">{{ dateService.format(payment.date) }}</ion-label>
+          <ion-label class="ion-text-end">{{ payment.amount | currency }}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="payments--skeleton" *ngIf="!payments">
+        <ion-item *ngFor="let i of size(15)">
+          <ion-label>
+            <ion-skeleton-text animated [width]="'50%'"></ion-skeleton-text>
+          </ion-label>
+
+          <ion-label class="ion-text-end">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="payments--empty" *ngIf="payments && !payments.length">
+        <ion-item>
+          <div class="empty-container">
+            <ion-icon slot="start" src="assets/images/no-data-icons/payments.svg"></ion-icon>
+            <ion-text class="ion-text-center" color="medium">
+              No data available
+            </ion-text>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

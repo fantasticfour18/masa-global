@@ -1,0 +1,52 @@
+<ion-app>
+  <ion-menu contentId="main" side="end">
+    <ion-content>
+      <div class="menu-background">
+        <div [ngClass]="!memberCardService.member ? 'menu-membership-card-skeleton' : memberCardService.member.memberCards.cardType()">
+          <app-membership-card [loading]="!memberCardService.member" [member]="memberCardService.member"></app-membership-card>
+        </div>
+      
+        <ion-list>
+
+          <ion-menu-toggle>
+            <ion-item lines="full" routerLink="/tabs/home">
+              <ion-icon slot="start" name="home"></ion-icon>
+              <ion-label>Home</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item lines="full" routerLink="/tabs/msa-documents">
+              <ion-icon slot="start" name="document"></ion-icon>
+              <ion-label>MSA</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item lines="full" routerLink="/tabs/my-card">
+              <ion-icon slot="start" name="card"></ion-icon>
+              <ion-label>My Card</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item lines="full" routerLink="/tabs/profile">
+              <ion-icon slot="start" name="contact"></ion-icon>
+              <ion-label>Profile</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle>
+            <ion-item lines="full" (click)="logout()">
+              <ion-icon slot="start" name="log-out"></ion-icon>
+              <ion-label>Log Out</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+        </ion-list>
+      </div>
+    </ion-content>
+
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

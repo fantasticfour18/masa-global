@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Contact Us
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/profile"></ion-back-button>
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Phone
+    </ion-list-header>
+
+    <ion-item detail="false" href="tel:1-800-643-9023">
+      <ion-label>
+        <h2>1-800-643-9023</h2>
+        <p>Customer Service</p>
+      </ion-label>
+
+      <ion-icon slot="end" name="call" color="medium"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Email
+    </ion-list-header>
+
+    <ion-item detail="false" href="mailto:info@masaglobal.com">
+      <ion-label>
+        <h2>info@masaglobal.com</h2>
+        <p>General</p>
+      </ion-label>
+
+      <ion-icon slot="end" name="mail" color="medium"></ion-icon>
+    </ion-item>
+
+    <ion-item detail="false" href="mailto:ambulanceclaims@masaglobal.com">
+      <ion-label>
+        <h2>ambulanceclaims@masaglobal.com</h2>
+        <p>Claims</p>
+      </ion-label>
+
+      <ion-icon slot="end" name="mail" color="medium"></ion-icon>
+    </ion-item>
+
+    <ion-item detail="false" href="mailto:travel@masaglobal.com">
+      <ion-label>
+        <h2>travel@masaglobal.com</h2>
+        <p>Itinerary</p>
+      </ion-label>
+
+      <ion-icon slot="end" name="mail" color="medium"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Mailing Address
+    </ion-list-header>
+
+    <ion-item detail="false" [href]="locationUrl">
+      <ion-label>
+        <h2>MASA Global Building</h2>
+        <p>1250 S. Pine Island Road, Suite 500</p>
+        <p>Plantation, FL 33324</p>
+        <p>United States</p>
+      </ion-label>
+
+      <ion-icon slot="end" name="map" color="medium"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

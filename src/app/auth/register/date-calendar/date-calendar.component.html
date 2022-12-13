@@ -1,0 +1,9 @@
+<div class="calendar-container">
+  <div class="dummy-cont" (click)="closeModal()"></div>
+  <mat-calendar class="date-cal" [minDate]="minDate" [maxDate]="maxDate" [startAt]="showSelected" 
+   [selected]="showSelected" (selectedChange)="setBirthDate($event)"></mat-calendar>
+  <div class="dummy-cont" (click)="closeModal()"></div>
+</div>
+
+  
+

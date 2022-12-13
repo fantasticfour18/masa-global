@@ -1,0 +1,39 @@
+.spouse-card {
+  ion-card-header, ion-card-content {
+    padding: 0;
+  }
+
+  &__header {
+    ion-item {
+      --background: var(--ion-color-primary);
+    }
+
+    ion-label {
+      font-size: 14px;
+      --color: var(--ion-color-white);
+    }
+
+    ion-label:last-child {
+      font-size: 18px;
+      text-transform: none;
+    }
+
+    .spouse-information {
+
+      &--skeleton {
+        ion-skeleton-text {
+          --background-rgb: var(--ion-color-white-rgb);
+        }
+      }
+    }
+  }
+
+  &__content {
+    .spouse-information {
+
+      &--skeleton {
+
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Settings
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/profile"></ion-back-button>
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list [formGroup]="settingsForm">
+    <ion-list-header>
+      Security
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Biometric Protection</ion-label>
+      <ion-toggle formControlName="isBiometricsEnabled"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Account
+    </ion-list-header>
+
+    <ion-item [routerLink]="['../bank-card']">
+      <ion-label>Update Bank Details</ion-label>
+    </ion-item>
+
+    <ion-item [routerLink]="['../change-password']">
+      <ion-label>Change Password</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="deviceInformation && deviceInformation.appVersion">
+    <ion-list-header>
+      Application Version
+    </ion-list-header>
+
+    <ion-item disabled>
+      <ion-label>{{ deviceInformation.appVersion + ' (' + deviceInformation.appBuild + ')' }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- <ion-list>
+    <ion-list-header>
+      User Settings
+    </ion-list-header>
+
+    <ion-item (click)="openPicker()">
+      <ion-label>
+        Currency
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      App Settings
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>
+        Notifications
+      </ion-label>
+    </ion-item>
+  </ion-list> -->
+</ion-content>

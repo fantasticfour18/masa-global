@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Claim Details
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/claims"></ion-back-button>
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <app-claim-card [claim]="claim"></app-claim-card>
+
+  <!-- <ion-segment class="ion-padding-start ion-padding-end" (ionChange)="segmentChanged($event)" value="0">
+    <ion-segment-button value="0">
+      <ion-label>Payments</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="1">
+      <ion-label>Notes</ion-label>
+    </ion-segment-button>
+  </ion-segment> -->
+
+  <ion-slides [options]="slidesOptions" (ionSlideWillChange)="slideChanged()">
+    <!-- <ion-slide>
+      <app-claim-payments-card></app-claim-payments-card>
+    </ion-slide> -->
+
+    <ion-slide>
+      <app-claim-notes-card [claim]="claim"></app-claim-notes-card>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

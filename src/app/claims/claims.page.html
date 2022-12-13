@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Claims
+    </ion-title>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="claims-history-card">
+    <ion-card-header>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label class="ion-text-uppercase">Claims History</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list class="claims" *ngIf="claims && claims.length">
+        <ion-item *ngFor="let claim of claims" [routerLink]="[claim.id]">
+          <div class="claim-status status-bullet" [ngClass]="'claim-status--' + claim.status"></div>
+
+          <ion-label>
+            <div class="title">
+              <ion-text>{{ dateService.format(claim.createdDate) }}</ion-text>
+            </div>
+
+            <div>
+              <ion-text class="bold" color="primary">{{ claim.amount | currency }}</ion-text>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="claims--skeleton" *ngIf="!claims">
+        <ion-item button *ngFor="let i of size(15)">
+          <ion-thumbnail>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+
+          <ion-label>
+            <div class="title">
+              <ion-skeleton-text class="bold" animated [width]="'40%'"></ion-skeleton-text>
+            </div>
+
+            <div>
+              <ion-skeleton-text class="bold" animated [width]="'20%'"></ion-skeleton-text>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="claims--empty" *ngIf="claims && !claims.length">
+        <ion-item>
+          <div class="empty-container">
+            <ion-icon slot="start" src="assets/images/no-data-icons/claims.svg"></ion-icon>
+            <ion-text class="ion-text-center" color="medium">
+              No data available
+            </ion-text>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>MSA</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="isLoading; else showDocuments">
+    <ion-card-content class="ion-no-padding">
+
+      <ion-grid>
+
+        <ion-row>
+          <ion-col>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-col>
+
+          <ion-col>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-template #showDocuments>
+
+    <div *ngIf="documentsList.length == 0" class="empty-docs ion-text-center ion-padding-horizontal">
+      <h2>{{errorMsg}}</h2>
+    </div>
+
+    <ion-card *ngIf="documentsList.length != 0">
+      <ion-card-content class="ion-no-padding">
+        <ion-grid>
+      
+          <ion-row *ngFor="let doc of documentsList; index as i">
+            <ion-col>
+              <p>
+                <span class="document-title">Product Document</span> 
+                <br>
+                <span class="document-subtitle">{{doc.docName}}</span>
+              </p>
+            </ion-col>
+      
+            <ion-col class="ion-text-right">
+              <a (click)="viewDocument(i)">View</a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+  </ng-template>
+   
+</ion-content>

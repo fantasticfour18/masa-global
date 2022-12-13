@@ -1,0 +1,44 @@
+<ion-card class="claim-notes-card">
+  <ion-card-header>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label class="ion-text-uppercase">Notes</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-list class="claim-notes" *ngIf="claim && claim.notes">
+      <ion-item *ngFor="let note of claim.notes" [routerLink]="['notes', note.id]">
+        <ion-label>
+          <p>{{ dateService.format(note.createdDate) }}</p>
+          {{ note.text }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+
+  <ion-card-content>
+    <ion-list class="claim-notes--skeleton" *ngIf="!claim">
+      <ion-item button *ngFor="let i of size(10)">
+        <ion-label>
+          <p><ion-skeleton-text animated [width]="'35%'"></ion-skeleton-text></p>
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+
+  <ion-card-content>
+    <ion-list class="claim-notes--empty" *ngIf="claim && !claim.notes">
+      <ion-item>
+        <div class="empty-container">
+          <ion-icon slot="start" src="assets/images/no-data-icons/notes.svg"></ion-icon>
+          <ion-text class="ion-text-center" color="medium">
+            No data available
+          </ion-text>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

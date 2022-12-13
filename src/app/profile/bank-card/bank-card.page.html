@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Payment Details</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/profile"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="cardNotFound" class="ion-padding-vertical ion-text-center">
+    <h2>{{cardNotFound}}</h2>
+  </div>
+
+  <div class="ion-margin">
+    <div class="card" [ngClass]="paymentCard?.defaultPaymentMethod?.card ? 'card-color' : 'echeck-color'" *ngIf="!cardNotFound">
+      <ng-container *ngIf="paymentCard; else cardSkeleton">
+        <ng-container *ngIf="paymentCard?.defaultPaymentMethod?.card; else echeck">
+          <div class="card-type">
+            <img src="assets/images/logos/visa.png" alt="">
+          </div>
+    
+          <div class="card-number">
+            <h2 class="ion-no-margin card-numb">....</h2>
+            <h2 class="ion-no-margin card-numb">....</h2>
+            <h2 class="ion-no-margin card-numb">....</h2>
+            <h2 class="ion-no-margin card-last4">{{paymentCard.defaultPaymentMethod.card.last_4AccountNumber}}</h2>
+          </div>
+    
+          <div class="card-meta">
+            <div>
+              <p class="ion-no-margin">Card holder</p>
+              <p class="ion-no-margin">{{paymentCard.defaultPaymentMethod.card.nameOnCard}}</p>
+            </div>
+    
+            <div>
+              <p class="ion-no-margin">Expires</p>
+              <p class="ion-no-margin">{{paymentCard.defaultPaymentMethod.card.expireMonth}}/{{paymentCard.defaultPaymentMethod.card.expireYear}}</p>
+            </div>
+    
+            <div>
+              <p class="ion-no-margin">Payment Token</p>
+              <p class="ion-no-margin">{{paymentCard.defaultPaymentMethod.paymethodToken}}</p>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #echeck>
+          <ion-label class="ion-margin-bottom eCheck"><b>eCheck: </b> 
+            <span>{{paymentCard.defaultPaymentMethod.echeck.accountType}}</span>
+          </ion-label>
+          <p class="account-name para-line-space">
+            Name of Bank
+            <br>
+            <b><span>{{paymentCard.defaultPaymentMethod.echeck.accountHolder}}</span></b>
+          </p>
+
+          <p class="para-line-space">
+            Routing Number
+            <br>
+            <b>{{paymentCard.defaultPaymentMethod.echeck.routingNumber}}</b>
+          </p>
+
+          <p class="para-line-space">
+            Account Number
+            <br>
+            <b>******{{paymentCard.defaultPaymentMethod.echeck.last_4AccountNumber}}</b>
+          </p>
+        </ng-template>
+        
+      </ng-container>
+
+      <ng-template #cardSkeleton>
+        <ng-container *ngIf="!cardNotFound">
+          <div class="card-type">
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </div>
+    
+          <div class="card-number">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </div>
+    
+          <div class="card-meta">
+            <div>
+              <p class="ion-no-margin"><ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text></p>
+              <p class="ion-no-margin"><ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text></p>
+            </div>
+    
+            <div>
+              <p class="ion-no-margin"><ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text></p>
+              <p class="ion-no-margin"><ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text></p>
+            </div>
+    
+            <div>
+              <p class="ion-no-margin"><ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text></p>
+              <p class="ion-no-margin"><ion-skeleton-text animated style="width: 50px;"></ion-skeleton-text></p>
+            </div>
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
+
+    <div class="billingAddress" *ngIf="!cardNotFound && paymentCard">
+      <ion-label>Default Billing Address</ion-label>
+      <p>
+        {{paymentCard.defaultBillingAddress?.physicalAddress?.streetLine1}}
+        <br>
+        {{paymentCard.defaultBillingAddress?.physicalAddress?.locality}}
+        <br>
+        {{paymentCard.defaultBillingAddress?.physicalAddress?.region}}, {{paymentCard.defaultBillingAddress?.physicalAddress?.country}} 
+        <br>
+        Postal code: {{paymentCard.defaultBillingAddress?.physicalAddress?.postalCode}}
+        <br>
+        Email: {{paymentCard.defaultBillingAddress?.email}}, Phone: {{paymentCard.defaultBillingAddress?.phone}}
+      </p>
+
+    </div>
+
+    <ion-button *ngIf="paymentCard" class="ion-text-uppercase update-btn" expand="block" (click)="navToBankDetails()">
+      Update
+    </ion-button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Membership
+    </ion-title>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-slides [options]="slidesOptions">
+    <ion-slide>
+      <app-membership-card [loading]="!member" [member]="member"></app-membership-card>
+    </ion-slide>
+  </ion-slides>
+
+  <app-member-information-card [loading]="!member" [member]="member"></app-member-information-card>
+  <app-spouse-card [loading]="!member" [member]="member"></app-spouse-card>
+  <app-dependents-card [loading]="!member" [member]="member"></app-dependents-card>
+</ion-content>

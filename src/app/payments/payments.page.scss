@@ -1,0 +1,54 @@
+.payment-button {
+  margin: 16px 0 0 0;
+}
+
+.payments-history-card {
+  .payments {
+    &--empty {
+      ion-item {
+        --min-height: 148px;
+        --padding-start: 0;
+        --padding-end: 0;
+        --inner-padding-start: 0;
+        --inner-padding-end: 0;
+      }
+
+      .empty-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+
+        ion-icon {
+          font-size: 48px;
+        }
+
+        ion-text {
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}
+
+ion-card-header, ion-card-content {
+  padding: 0;
+}
+
+ion-card-header {
+  ion-item {
+    --background: var(--ion-color-primary);
+  }
+
+  ion-label {
+    --color: var(--ion-color-white);
+  }
+
+  ion-label:first-child {
+    font-size: 14px;
+  }
+}
+
+.update-bank-btn ion-list {
+  border-radius: 4px;
+}

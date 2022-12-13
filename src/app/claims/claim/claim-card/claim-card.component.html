@@ -1,0 +1,50 @@
+<ion-card class="claim-card" *ngIf="claim">
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label class="fit-content">ID</ion-label>
+      <ion-label class="bold ion-text-end" color="primary">#{{ claim.id }}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="fit-content">Create Date</ion-label>
+      <ion-label class="bold ion-text-end" color="primary">{{ dateService.format(claim.createdDate) }}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="fit-content">Status</ion-label>
+      <ion-label class="badge-label ion-text-end">
+        <ion-badge class="claim-status ion-text-capitalize" [ngClass]="'claim-status--' + claim.status">
+          {{ claim.status }}
+        </ion-badge>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="claim.denialReason">
+      <ion-label class="status-message" color="danger">{{ claim.denialReason }}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="fit-content">Claim For</ion-label>
+      <ion-label class="bold ion-text-end" color="primary">{{ claim.patientName }}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="fit-content">Amount</ion-label>
+      <ion-label class="bold ion-text-end" color="primary">{{ claim.amount | currency }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card>
+
+<ion-card class="claim-card" *ngIf="!claim">
+  <ion-list lines="none">
+    <ion-item *ngFor="let i of size(5)">
+      <ion-label>
+        <ion-skeleton-text animated [width]="'45%'"></ion-skeleton-text>
+      </ion-label>
+
+      <ion-label class="bold ion-text-end" color="primary">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card>

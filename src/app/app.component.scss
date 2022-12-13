@@ -1,0 +1,47 @@
+app-membership-card {
+    margin: 0 !important;  
+}
+
+.card-trs, .card-trs-trpp {
+    background: linear-gradient(315deg, #7bb031 0%, #f6f3aa 100%);
+}
+
+.card-basic, .card-intl, .card-intl-sp {
+    background: linear-gradient(315deg, #33bbe4 0%, #184191 100%);
+}
+
+.card-aff-plat {
+    background: linear-gradient(315deg, #3aa9ec 0%, #294cff 100%);
+}
+
+.card-aff-clm {
+    background: linear-gradient(315deg, #ddc05a 0%, #b5a067 100%);
+}
+
+.card-default, .card-mts, .card-mts-fl, .card-mts-scsfa {
+    background: linear-gradient(135deg, #091585 0%, #010730 100%);
+}
+
+.card-trs-oap {
+    background: linear-gradient(315deg, #f5d765 0%, #f6b5aa 100%);
+}
+
+.card-mts-clm, .card-mts-clm-fl {
+    background: linear-gradient(315deg, #ddc05a 0%, #b5a067 100%);
+}
+
+.menu-membership-card-skeleton {
+    background: #FFFFFF;
+}
+
+.menu-background {
+    height: 100%;
+    background-color: #FFFFFF !important;
+    background: url('../assets/images/profile-background.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom; 
+}
+    
+    
+ 

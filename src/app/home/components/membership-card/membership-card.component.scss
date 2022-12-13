@@ -1,0 +1,126 @@
+@import '../../../../theme/mixins';
+
+:host {
+  width: 100%;
+  margin: 16px 16px 0 16px !important;
+
+  .membership-card {
+    display: flex;
+    flex-direction: column;
+    height: 192px;
+    width: 100%;
+    min-width: 288px;
+    max-width: 343px;
+    margin: auto !important;
+    padding: 16px;
+    color: var(--ion-color-black);
+    border-radius: 16px !important;
+    box-shadow: none;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      flex: 1;
+      max-height: 30px;
+      margin-bottom: 10px;
+
+      .logo {
+        height: 30px;
+        flex: 7;
+      }
+
+    }
+
+    &__type {
+      flex: 1;
+      text-align: start;
+      align-self: flex-end;
+      max-height: fit-content;
+      margin-bottom: 5px;
+
+      div:first-of-type {
+        margin-bottom: 5px;
+        font-size: 10px;
+        line-height: 10px;
+        white-space: nowrap;
+      }
+
+      div:last-of-type {
+        font-size: 16px;
+        line-height: 16px;
+      }
+    }
+
+    &__name {
+      flex: 1;
+      text-align: start;
+      align-self: flex-start;
+      max-height: fit-content;
+
+      .members {
+        margin-bottom: 10px;
+        font-size: 16px;
+        line-height: 16px;
+      }
+
+      .membership-number {
+        font-size: 14px;
+        line-height: 14px;
+      }
+    }
+
+    &__footer {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      max-height: fit-content;
+
+      div:first-of-type {
+        font-size: 10px;
+        line-height: 10px;
+        white-space: nowrap;
+      }
+
+      div:last-of-type {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+
+        img {
+          margin-right: 8px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .plane-logo, .ambulance-logo, .helicopter-logo {
+        width: 18px;
+      }
+      
+    }
+
+    &--skeleton {
+      .membership-card__header {
+        margin-bottom: 10px;
+        width: 155px;
+        height: 30px;
+        border-radius: unset;
+      }
+
+      .membership-card__type {
+        margin-bottom: 10px;
+        width: 30%;
+      }
+
+      .membership-card__name {
+        width: 100%;
+      }
+    }
+
+    @include membership-card();
+  }
+}

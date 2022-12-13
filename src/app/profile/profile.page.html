@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Profile
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" fill="clear">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid class="ion-no-padding profile-background">
+    <ion-row>
+      <ion-col class="ion-no-padding profile-header">
+        <div *ngIf="member">
+          <ion-text>{{ member.fullName() }}</ion-text>
+          <ion-badge
+            class="member-status ion-text-capitalize fit-content"
+            [ngClass]="'member-status--' + member.status">
+            {{ member.status }}
+          </ion-badge>
+        </div>
+
+        <div *ngIf="!member">
+          <ion-skeleton-text animated [width]="'50%'"></ion-skeleton-text>
+          <ion-skeleton-text animated [width]="'25%'"></ion-skeleton-text>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-list>
+          <ion-item [routerLink]="['user-settings']">
+            <ion-icon slot="start" name="settings" color="primary"></ion-icon>
+            <ion-label>Settings</ion-label>
+          </ion-item>
+
+          <ion-item [routerLink]="['contact-us']">
+            <ion-icon slot="start" name="chatbubbles" color="primary"></ion-icon>
+            <ion-label>Contact Us</ion-label>
+          </ion-item>
+
+          <ion-item button (click)="openPrivacyPolicy()">
+            <ion-icon slot="start" name="document" color="primary"></ion-icon>
+            <ion-label>Privacy Policy</ion-label>
+          </ion-item>
+
+          <!-- <ion-item [routerLink]="['notifications']">
+            <ion-icon slot="start" name="notifications" color="primary"></ion-icon>
+            <ion-label>Notifications Center</ion-label>
+          </ion-item> -->
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

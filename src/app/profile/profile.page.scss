@@ -1,0 +1,59 @@
+@import '../../theme/mixins';
+
+:host {
+  ion-refresher.refresher-refreshing {
+    margin: 0;
+  }
+
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 160px;
+    background: url('../../assets/images/profile-header.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    padding-left: 16px;
+
+    ion-text {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 26px;
+      color: var(--ion-color-white);
+    }
+
+    @include member-status;
+  }
+
+  .profile-background {
+    background: url('../../assets/images/profile-background.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+
+  ion-content {
+    --background: var(--ion-color-white);
+  }
+
+  ion-grid {
+    height: 100%;
+  }
+
+  ion-skeleton-text {
+    margin-bottom: 8px;
+    height: 20px;
+    --background-rgb: var(--ion-color-white-rgb);
+  }
+
+  ion-item {
+    &:last-child.ios {
+      --inner-border-width: 0 0 0.55px 0;
+    }
+
+    &:last-child.md {
+      --inner-border-width: 0 0 1px 0;
+    }
+  }
+}

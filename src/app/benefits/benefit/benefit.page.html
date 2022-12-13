@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Benefit Details
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/benefits"></ion-back-button>
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="benefit-card" *ngIf="benefit">
+    <ion-card-header class="benefit-card__header">
+      <ion-list>
+        <ion-item>
+          <ion-icon slot="start" size="large" src="assets/images/benefits-icons/{{ benefit.icon }}.svg"></ion-icon>
+          <ion-label>{{ benefit.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+
+    <ion-card-content class="benefit-card__content ion-margin">
+      <div class="ion-margin-bottom" *ngFor="let description of formattedBenefitDescription">
+        {{ description }}
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="benefit-card--skeleton" *ngIf="!benefit">
+    <ion-card-header class="benefit-card__header">
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+
+          <ion-label>
+            <ion-skeleton-text animated [width]="'80%'"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+
+    <ion-card-content class="benefit-card__content ion-margin">
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated [width]="'70%'"></ion-skeleton-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

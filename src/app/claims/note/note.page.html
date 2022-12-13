@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Note Details
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <!-- <ion-back-button defaultHref="tabs/claims{{ '/' + (claim ? claim.id : '') }}"></ion-back-button> -->
+    </ion-buttons>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="note-card" *ngIf="note">
+    <ion-card-content>
+      <ion-text>
+        {{ dateService.format(note.createdDate) }}
+      </ion-text>
+
+      <ion-text>
+        {{ note.text }}
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="note-card" *ngIf="!note">
+    <ion-card-content>
+      <ion-text>
+        <ion-skeleton-text animated [width]="'30%'"></ion-skeleton-text>
+      </ion-text>
+
+      <ion-text *ngFor="let i of size(9)">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-text>
+
+      <ion-skeleton-text animated [width]="'70%'"></ion-skeleton-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

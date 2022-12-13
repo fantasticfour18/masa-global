@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>My Card</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <ion-card> -->
+    <div id="print-wrapper">
+      <app-membership-card [loading]="!member" [member]="member"></app-membership-card>      
+    </div>
+
+    <!-- <ion-card-content class="ion-text-end"> -->
+      <div *ngIf="member" class="ion-padding ion-text-right">
+        <ion-button size="small" (click)="printCard()">
+          <ion-icon slot="icon-only" name="print"></ion-icon>
+        </ion-button>
+        <ion-button size="small" (click)="saveCard()">
+          <ion-icon slot="icon-only" name="download"></ion-icon>
+        </ion-button>
+      </div>
+    <!-- </ion-card-content> -->
+    
+ <!--  </ion-card> -->
+  
+</ion-content>

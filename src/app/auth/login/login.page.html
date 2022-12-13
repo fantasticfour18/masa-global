@@ -1,0 +1,59 @@
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <form [formGroup]="loginForm" (submit)="onSubmit()" (keyup.enter)="onSubmit()">
+      <ion-row>
+        <ion-col class="ion-no-padding auth-header"></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-list class="ion-padding-start ion-padding-end" lines="full">
+            <div class="item-container">
+              <ion-item>
+                <ion-label position="stacked">Email</ion-label>
+                <ion-input formControlName="email" type="text" placeholder="member@domain.com" 
+                  (ionChange)="checkSpaces($event)"></ion-input>
+              </ion-item>
+
+              <div class="validation-error" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">
+                Email required
+              </div>
+
+              <div class="validation-error" *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">
+                Invalid Email format
+              </div>
+            </div>
+
+            <div class="item-container">
+              <ion-item>
+                <ion-label position="stacked">Password</ion-label>
+                <ion-label class="forgot-password" position="stacked" color="medium" (click)="openForgotPasswordModal()">Forgot your password?</ion-label>
+                <ion-input formControlName="password" [type]="showPass ? 'text' : 'password'" placeholder="******"></ion-input>
+                <ion-icon *ngIf="!showPass" name="eye-off" slot="end" class="show-pass-icon" (click)="showPass=true;"></ion-icon>
+                <ion-icon *ngIf="showPass" name="eye" slot="end" class="show-pass-icon" (click)="showPass=false;"></ion-icon>
+              </ion-item>
+
+              <div class="validation-error" *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')">
+                Password required
+              </div>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-row class="footer">
+            <ion-col class="ion-no-padding">
+              <ion-button class="ion-padding-start ion-padding-end" expand="block" type="submit">
+                Login
+              </ion-button>
+
+              <a class="footer__link" routerLink="/auth/register" routerDirection="root">Create an account</a>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-footer>
+    </form>
+  </ion-grid>
+</ion-content>

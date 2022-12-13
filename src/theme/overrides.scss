@@ -1,0 +1,85 @@
+:root {
+  --ion-background-color: var(--ion-color-light);
+
+  --toolbar-min-height: 56px;
+  --item-min-height: 56px;
+}
+
+ion-toolbar {
+  --min-height: var(--toolbar-min-height);
+  --background: var(--ion-color-white);
+
+  // INFO: Ionic bug https://github.com/ionic-team/ionic/issues/18176
+  ion-back-button.ios {
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+
+    --padding-start: 5px !important;
+    --padding-end: 5px !important;
+  }
+}
+
+ion-refresher.refresher-refreshing {
+  margin-top: 8px;
+  z-index: auto;
+}
+
+ion-segment {
+  min-height: 30px;
+}
+
+ion-list {
+  padding: 0 !important;
+
+  ion-list-header {
+    font-size: 14px;
+    font-weight: 400;
+    --background: var(--ion-color-white);
+  }
+
+  ion-item {
+    --min-height: var(--item-min-height);
+    --highlight-height: 0;
+    --background: var(--ion-color-white);
+
+    &:last-child {
+      --inner-border-width: 0;
+    }
+  }
+}
+
+ion-label {
+  white-space: normal !important;
+}
+
+ion-button {
+  --border-radius: 4px;
+}
+
+ion-badge {
+  font-size: 14px;
+  --padding-top: 3px;
+  --padding-bottom: 3px;
+}
+
+ion-card {
+  margin: 16px !important;
+  border-radius: 4px !important;
+  --background: var(--ion-color-white) !important;
+}
+
+.validation-error::first-letter {
+  text-transform: capitalize;
+}
+
+.fit-content {
+  max-width: fit-content;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.custom-toastr {
+  word-break: break-word;
+}

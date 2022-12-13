@@ -1,0 +1,18 @@
+{
+  "id": "b59c52f6",
+  "name": "pts-mobile",
+  "type": "angular",
+  "integrations": {
+    "capacitor": {},
+    "enterprise": {
+      "orgId": "96af491c-bbd5-4942-aa8c-f44ce8125ce2",
+      "appId": "b59c52f6",
+      "keyId": 478,
+      "productKey": "key_13b9d351666a4623973e65fee8a2b199",
+      "registries": [
+        "@ionic-enterprise;https://registry.ionicframework.com/"
+      ]
+    },
+    "cordova": {}
+  }
+}

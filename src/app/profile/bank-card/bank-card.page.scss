@@ -1,0 +1,82 @@
+.card {
+    width: 100%;
+    min-width: 330px;
+    max-width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(45deg, #82c0fa 0%, #c7e4ff 100%);
+    padding: 10px;
+    border-radius: 10px;
+
+    .eCheck span, .account-name span {
+        text-transform: capitalize;
+    }
+
+    .para-line-space {
+        margin: 10px 0;
+        line-height: 22px;
+    }
+}
+
+.card-color {
+    color: #FFFFFF;
+}
+
+.echeck-color {
+    color: #000000;
+}
+
+.card-type img {
+    width: 70px;
+}
+
+.card-number {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 20px;
+
+    .card-numb {
+        font-weight: bold;
+        letter-spacing: 6px;
+        line-height: 20px;
+    }
+
+    .card-last4 {
+        letter-spacing: 6px;
+    }
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+
+    div:first-child, div:last-child{
+        max-width: 120px;
+    }
+    
+    p {
+        padding-bottom: 10px;
+    }
+}
+
+.update-btn {
+    font-size: 14px;
+    margin: 40px 0;
+    height: var(--item-min-height);
+}
+
+.billingAddress {
+    background: #FFFFFF;
+    width: 100%;
+    min-width: 330px;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 24px auto;
+
+    ion-label {
+        font-weight: bold;
+    }
+}

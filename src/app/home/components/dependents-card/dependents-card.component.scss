@@ -1,0 +1,17 @@
+
+.dependents-card {
+  ion-card-header, ion-card-content {
+    padding: 0;
+  }
+
+  &__header {
+    ion-item {
+      --background: var(--ion-color-primary);
+    }
+
+    ion-label {
+      font-size: 14px;
+      --color: var(--ion-color-white);
+    }
+  }
+}

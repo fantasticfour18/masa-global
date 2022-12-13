@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Benefits
+    </ion-title>
+
+    <!-- <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-button routerLink="/tabs/msa-documents" class="agreement-button ion-padding-start ion-padding-end ion-text-uppercase" color="success" expand="block">
+    View Member Services Agreement
+  </ion-button>
+
+  <ion-card class="benefits-card">
+    <ion-card-header>
+      <ion-list>
+        <ion-item>
+          <ion-label class="ion-text-uppercase">Benefits</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list class="benefits" *ngIf="benefits">
+        <ion-item *ngFor="let benefit of benefits" [routerLink]="[benefit.id]">
+          <ion-icon slot="start" size="large" src="assets/images/benefits-icons/{{ benefit.icon }}.svg"></ion-icon>
+          <ion-label>{{ benefit.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="benefits--skeleton" *ngIf="!benefits">
+        <ion-item button *ngFor="let i of size(15)">
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+
+          <ion-label>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="benefits--empty" *ngIf="benefits && !benefits.length">
+        <ion-item>
+          <div class="empty-container">
+            <ion-icon slot="start" src="assets/images/no-data-icons/benefits.svg"></ion-icon>
+            <ion-text class="ion-text-center" color="medium">
+              No data available
+            </ion-text>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

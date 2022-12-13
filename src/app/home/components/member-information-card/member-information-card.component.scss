@@ -1,0 +1,31 @@
+@import '../../../../theme/mixins';
+
+.member-information-card {
+  .badge-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  ion-card-header, ion-card-content {
+    padding: 0;
+  }
+
+  ion-card-header {
+    padding: 12px 0;
+    border-bottom: 1px solid #c8c7cc;
+
+    ion-item {
+      --min-height: 44px;
+
+      &:first-child {
+        ion-label:first-child {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  @include member-status;
+}

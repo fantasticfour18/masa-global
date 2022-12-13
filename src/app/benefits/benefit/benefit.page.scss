@@ -1,0 +1,24 @@
+:host {
+  ion-card-header, ion-card-content {
+    padding: 0;
+  }
+
+  ion-label {
+    --color: var(--ion-color-primary);
+  }
+
+  ion-item {
+    &:last-child {
+      --inner-border-width: 0 0 0.55px 0;
+    }
+  }
+
+  .benefit-card {
+    &--skeleton {
+      ion-thumbnail {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}

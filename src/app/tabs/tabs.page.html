@@ -1,0 +1,28 @@
+<ion-tabs>
+  <ion-tab-bar [ngClass]="{ 'ion-hide': isChildPage }" slot="bottom">
+    <ion-tab-button (click)="handleTabClick($event)" tab="home">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button *ngIf="member && member.selfPay" (click)="handleTabClick($event)" tab="payments">
+      <ion-icon name="card"></ion-icon>
+      <ion-label>Payments</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="handleTabClick($event)" tab="benefits">
+      <ion-icon name="medal"></ion-icon>
+      <ion-label>Benefits</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="handleTabClick($event)" tab="claims">
+      <ion-icon name="paper"></ion-icon>
+      <ion-label>Claims</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="handleTabClick($event)" tab="profile">
+      <ion-icon name="contact"></ion-icon>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

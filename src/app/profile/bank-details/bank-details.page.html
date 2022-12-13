@@ -1,0 +1,223 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Payment Details</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/profile/bank-card"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <form [formGroup]="addressDetails" (submit)="updateAddressDetails()" (keyup.enter)="updateAddressDetails()">
+            <ion-list class="ion-padding-start ion-padding-end" lines="full">
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Email</ion-label>
+                  <ion-input type="text" formControlName="email" (ionChange)="trimFormValue($event, 'email')"></ion-input>
+                </ion-item>
+              </div>
+              <div class="validation-error" *ngIf="addressDetails.get('email').touched && addressDetails.get('email').hasError('email')">
+                Enter valid email
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Phone</ion-label>
+                  <ion-input type="text" inputmode="numeric" maxlength="12" formControlName="phone" (ionChange)="trimPhone($event)"></ion-input>
+                </ion-item>
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Address</ion-label>
+                  <ion-input type="text" formControlName="address" (ionChange)="trimFormValue($event, 'address')"></ion-input>
+                </ion-item>
+              </div>
+              <div class="validation-error" *ngIf="addressDetails.get('address').touched && addressDetails.get('address').hasError('required')">
+                Address required
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">City</ion-label>
+                  <ion-input type="text" formControlName="city" (ionChange)="trimFormValue($event, 'city')"></ion-input>
+                </ion-item>
+
+                <div class="validation-error" *ngIf="addressDetails.get('city').touched && addressDetails.get('city').hasError('required')">
+                  City required
+                </div>
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">State</ion-label>
+                  <ion-input type="text" formControlName="state" (ionChange)="trimFormValue($event, 'state')"></ion-input>
+                </ion-item>
+
+                <div class="validation-error" *ngIf="addressDetails.get('state').touched && addressDetails.get('state').hasError('required')">
+                  State required
+                </div>
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Zip</ion-label>
+                  <ion-input type="text" formControlName="zip" (ionChange)="trimFormValue($event, 'zip')"></ion-input>
+                </ion-item>
+
+                <div class="validation-error" *ngIf="addressDetails.get('zip').touched && addressDetails.get('zip').hasError('required')">
+                  Zip required
+                </div>
+              </div>
+            </ion-list>
+
+            <ion-button class="ion-padding-start ion-padding-end form-submit" expand="block" type="submit"
+              [disabled]="isAddressUpdating || isCardUpdating || !addressDetails.valid">
+              <span *ngIf="!isAddressUpdating">Update Billing Address</span>
+              <ion-spinner *ngIf="isAddressUpdating" name="crescent"></ion-spinner>
+            </ion-button>
+          </form>
+          <!--Address Form End-->
+
+          <!--Payment Card Form-->
+          <form [formGroup]="cardDetails" (submit)="updateCardDetails()" (keyup.enter)="updateCardDetails()">
+            <ion-list>
+            <div class="item-container">
+              <ion-item mode="md">
+                <ion-radio-group class="update-type" value="card" (ionChange)="setUpdateType($event)">
+                  <ion-item lines="none">
+                    <ion-radio slot="start" value="card" mode="md"></ion-radio>
+                    <ion-label>Update Card</ion-label>
+                  </ion-item>
+    
+                  <ion-item lines="none">
+                    <ion-radio slot="start" value="echeck" mode="md"></ion-radio>
+                    <ion-label>Update ACH</ion-label>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-item>
+            </div>
+
+            <ng-container *ngIf="updateCardOrAch == 'card'">
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Full Name On Card</ion-label>
+                  <ion-input type="text" formControlName="nameOnCard" (ionChange)="trimCardForm($event, 'nameOnCard')"></ion-input>
+                </ion-item>
+              </div>
+              <div class="validation-error" *ngIf="cardDetails.get('nameOnCard').touched && cardDetails.get('nameOnCard').hasError('required')">
+                Full name required
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Card Number</ion-label>
+                  <ion-input type="text" inputmode="numeric" maxlength="16" formControlName="accountNumber"
+                    (ionChange)="trimCardNumeric($event, 'accountNumber')"></ion-input>
+                </ion-item>
+              </div>
+              <div class="validation-error" *ngIf="cardDetails.get('accountNumber').touched && cardDetails.get('accountNumber').hasError('required')">
+                Card Number required
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Expiration</ion-label>
+                  <ion-row>
+                    <ion-col size="5" class="ion-no-padding">
+                      <ion-input #cardExpMonth type="text" inputmode="numeric" maxlength="2" placeholder="MM" formControlName="expireMonth" 
+                      (ionChange)="setExpireDate($event); $event.target.value.length == 2 ? cardExpYear.setFocus() : ''"></ion-input>
+                    </ion-col>
+                    <ion-col size="2">/</ion-col>
+                    <ion-col size="5" class="ion-no-padding">
+                      <ion-input #cardExpYear type="text" inputmode="numeric" maxlength="4" placeholder="YYYY" formControlName="expireYear" 
+                      (ionChange)="$event.target.value.length == 0 ? (allowFocus ? cardExpMonth.setFocus() : '') : ''; trimCardNumeric($event, 'expireYear');"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  </ion-item>
+              </div>
+              <div class="validation-error" *ngIf="cardDetails.get('expireMonth').touched && cardDetails.get('expireMonth').hasError('required')
+                && cardDetails.get('expireYear').touched && cardDetails.get('expireYear').hasError('required')">
+                Expiration Date required
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Security Code</ion-label>
+                  <ion-input type="text" inputmode="numeric" maxlength="4" placeholder="CVC" formControlName="cardVerificationValue"
+                    (ionChange)="trimCardNumeric($event, 'cardVerificationValue')"></ion-input>
+                </ion-item>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="updateCardOrAch == 'echeck'">
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Name of Bank</ion-label>
+                  <ion-input type="text" formControlName="accountHolder" (ionChange)="trimCardForm($event, 'accountHolder')"></ion-input>
+                </ion-item>
+
+                <div class="validation-error" *ngIf="cardDetails.get('accountHolder').touched && cardDetails.get('accountHolder').hasError('required')">
+                  Name of Bank required
+                </div>
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Routing Number</ion-label>
+                  <ion-input type="text" inputmode="numeric" formControlName="routingNumber" (ionChange)="trimCardNumeric($event, 'routingNumber')"></ion-input>
+                </ion-item>
+
+                <div class="validation-error" *ngIf="cardDetails.get('routingNumber').touched && cardDetails.get('routingNumber').hasError('required')">
+                  Routing number required
+                </div>
+              </div>
+
+              <div class="item-container">
+                <ion-item>
+                  <ion-label position="stacked">Account Number</ion-label>
+                  <ion-input type="text" inputmode="numeric" formControlName="raccountNumber" (ionChange)="trimCardNumeric($event, 'raccountNumber')"></ion-input>
+                </ion-item>
+
+                <div class="validation-error" *ngIf="cardDetails.get('raccountNumber').touched && cardDetails.get('raccountNumber').hasError('required')">
+                  Account number required
+                </div>
+              </div>
+            </ng-container>
+          </ion-list>
+
+            <ion-button class="ion-padding-start ion-padding-end form-submit" expand="block" type="submit" 
+              [disabled]="isCardUpdating || isAddressUpdating || 
+              (updateCardOrAch == 'card' && (!cardDetails.get('nameOnCard').valid || !cardDetails.get('accountNumber').valid
+                || !cardDetails.get('expireMonth').valid || !cardDetails.get('expireYear').valid)) ||
+              (updateCardOrAch == 'echeck' && (!cardDetails.get('accountHolder').valid
+                || !cardDetails.get('routingNumber').valid || !cardDetails.get('raccountNumber').valid))">
+              <span *ngIf="!isCardUpdating">Update Payment Details</span>
+              <ion-spinner *ngIf="isCardUpdating" name="crescent"></ion-spinner>
+            </ion-button>
+          </form>
+
+          <!-- Payment Card Form End -->
+        </ion-col>
+      </ion-row>
+
+      <!-- <ion-footer>
+        <ion-toolbar>
+          <ion-row class="footer">
+            <ion-col class="ion-no-padding">
+              <ion-button class="ion-padding-start ion-padding-end" expand="block" type="submit">
+                Update
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-footer> -->
+    
+  </ion-grid>
+
+</ion-content>

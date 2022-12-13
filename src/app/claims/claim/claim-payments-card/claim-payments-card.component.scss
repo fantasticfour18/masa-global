@@ -1,0 +1,47 @@
+:host {
+  width: 100%;
+
+  .claim-payments-card {
+    ion-card-header {
+      ion-item {
+        --background: var(--ion-color-primary);
+      }
+
+      ion-label {
+        --color: var(--ion-color-white);
+      }
+
+      ion-label:first-child {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .payment-card-item {
+    padding: 8px 0 !important;
+    background-color: transparent;
+    border-bottom: 1px solid #c8c7cc;
+
+    &:last-child {
+      border: none;
+    }
+
+    ion-label {
+      margin: 0;
+    }
+
+    ion-item {
+      font-size: 14px;
+
+      --min-height: 32px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      --inner-padding-start: 0;
+      --inner-padding-end: 0;
+    }
+  }
+
+  ion-card-header, ion-card-content {
+    padding: 0;
+  }
+}
